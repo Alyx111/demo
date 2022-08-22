@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="">
+        2
+        console.log(1&&2&&3);//3
+        console.log(1||2||3);//1
+    </script>
+    <script src="">
+        3
+        var arr=[1,2,3,4,5]
+        for(var i=0;i<arr.length;i++){
+            arr[i]=function(){
+                console.log(i);
+            }
+
+        }
+        arr[3]()//5
+    </script>
+    <script src="">
+        4
+        const shape={
+            redius:10,
+            diameter(){
+                return this.redius*2
+            },
+            perimeter:()=>2*Math.PI*this.radius
+        }
+        console.log(shape.diameter());//20
+        console.log(shape.perimeter());//NaN
+    </script>
+    <script src="">
+        5
+        let a={greeting:'Amy'}
+        let b={greeting:'Bruce'}
+        let c={greeting:'Cathrine'}
+        Object.assign(b,a)
+        console.log(b.greeting);//Amy
+        c=b
+        console.log(c.greeting);//Amy
+
+    </script>
+    <script src="">
+      6
+      console.log(3+4+"5"+6);  //756
+    </script>
+    <script src="">
+        7
+        let number=0
+        console.log(number++);//0
+        console.log(++number);//2
+        console.log(number);//2
+    </script>
+    <script src="">
+        8
+        const obj={
+            a:'one',
+            b:'two',
+            a:{
+                a:'three'
+            }
+        }
+        console.log(obj);//{a:{a:three}b:two}
+    </script>
+    <script >
+     9
+     [[0,1],[2,3]].reduce(
+        (acc,cur)=>{
+            return acc.concat(cur)
+        },
+        [1,2]
+     )
+     //120123
+    </script>
+    <script src="">
+        10
+        const user ={name:"Lily",age:21,admin:false}
+        const admin={admin:true,...user}
+        console.log(admin);//{admin:false,name:"Lily",age:21}
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="dplayer" class="player"></div>
+    <!-- https://dplayer.diygod.dev/zh/guide.html
+    https://www.bootcdn.cn/ -->
+    <script src="./js/hls.min.js"></script>
+    <script src="./js/DPlayer.min.js"></script>
+    <script>
+     const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+        url: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+        type: 'hls',
+    },
+    pluginOptions: {
+        hls: {
+            // hls config
+        },
+    },
+});
+console.log(dp.plugins.hls); // Hls 实例
+    </script>
+    <style>
+        html,body{
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+        }
+        .player {
+          width: 100%;
+          height: 500px;
+        }
+      </style>
+  </body>
+  
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>部门/员工选择</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="title">请选择部门/员工</div>
+    <div class="form">
+      <div class="department-box">
+        <ul>
+          <li v-for="item in departments">
+            <input type="checkbox" v-model="department" :value="item.id"
+              @change="handleDepartmentChange($event,item)" />
+            {{item.name}}
+            <span v-if="item.show" class="cursor" @click="item.show=false">
+              -
+            </span>
+            <span v-if="!item.show" class="cursor" @click="item.show=true">
+              +
+            </span>
+            <ul v-if="item.show" class="user-list">
+              <li v-for="cell in item.users">
+                <input type="checkbox" v-model="user" :value="cell.id" @change="handleUserChange($event,item,cell)" />
+                {{cell.name}}
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {{JSON.stringify(showData)}}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.4/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          department: [],
+          user: [],
+          departments: [
+            {
+              id: 1,
+              name: '部门1',
+              show: true,
+              users: [
+                { id: 1, name: '小一' },
+                { id: 2, name: '小二' },
+                { id: 3, name: '小三' }
+              ]
+            },
+            {
+              id: 2,
+              name: '部门2',
+              show: true,
+              users: [
+                { id: 4, name: '小四' },
+                { id: 5, name: '小五' },
+                { id: 6, name: '小六' }
+              ]
+            },
+            {
+              id: 3,
+              name: '部门3',
+              show: true,
+              users: [
+                { id: 7, name: '小七' },
+                { id: 8, name: '小八' },
+                { id: 9, name: '小九' }
+              ]
+            }
+          ]
+        }
+      },
+      computed: {
+        showData() {
+          let choosedDepartmentUserId = []
+          this.departments.forEach(item => {
+            if (this.department.indexOf(item.id) > -1) {
+              item.users.forEach(user => {
+                choosedDepartmentUserId.push(user.id)
+              })
+            }
+          })
+          return {
+            department: this.department,
+            user: this.user.filter(item => {
+              return choosedDepartmentUserId.indexOf(item) == -1
+            })
+          }
+        }
+      },
+      methods: {
+        handleDepartmentChange(ev, item) {
+          const checked = ev.target.checked
+          if (checked) {
+            item.users.forEach((cell) => {
+              if (this.user.indexOf(cell.id) === -1) {
+                this.user.push(cell.id)
+              }
+            })
+          } else {
+            item.users.forEach((cell) => {
+              const index = this.user.indexOf(cell.id)
+              if (index !== -1) {
+                this.user.splice(index, 1)
+              }
+            })
+          }
+        },
+        handleUserChange(ev, item, cell) {
+          const checked = ev.target.checked
+          if (!checked) {
+            this.department.splice(this.department.indexOf(item.id), 1)
+          } else {
+            let num = 0
+            item.users.forEach((user) => {
+              if (this.user.indexOf(user.id) > -1) {
+                num++
+              }
+            })
+            if (num === item.users.length) {
+              this.department.push(item.id)
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <style>
+    .cursor {
+      cursor: pointer;
+    }
+
+    ul,
+    li {
+      list-style: none;
+    }
+
+    .user-list li {
+      display: inline-block
+    }
+  </style>
+</body>
+
+</html>
