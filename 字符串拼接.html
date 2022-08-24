@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border: 1px solid blueviolet;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table border="1" cellpadding="20" cellspacing="0">
+      <thead>
+        人員周產能狀況
+        <tr>
+          <td>姓名</td>
+          <td>週一</td>
+          <td>週二</td>
+          <td>週三</td>
+          <td>週四</td>
+          <td>週五</td>
+          <td>週六</td>
+          <td>週日</td>
+        </tr>
+      </thead>
+      <tbody id="contain"></tbody>
+    </table>
+    <script>
+   
+      var arrList = [
+        ["张三", 40, 50, 60, 55, 40, 70, 60],
+        ["李四", 40, 50, 60, 55, 40, 70, 60],
+        ["王五", 40, 50, 60, 55, 40, 70, 60],
+        ["赵六", 40, 50, 60, 55, 40, 70, 60],
+      ];
+      var arr = [
+        "F168554",
+        "张三",
+        "白班",
+        "F2222",
+        "李四",
+        "晚班",
+        "234",
+        "王五",
+        "白班",
+        "F567",
+        "赵六",
+        "晚班",
+      ];
+      var arrs = [];
+      arr.forEach((element, index) => {
+        if (index % 3 == 1) {
+          // console.log(element)
+          arrs.push(element);
+        }
+      });
+
+      //   console.log(111, arrs);
+
+      var str = "";
+      //外层循环,生成tr
+   
+    arrList.forEach(item => {
+        str+="<tr>";
+       str+=`<td>${item[0]}</td>`
+       item.slice(1).forEach(cell => {
+        str+=`<td class="${cell>50?"pink":""}">${cell}</td>`
+        
+       });
+
+        
+    });
+
+      // 将定义好的内容,写入到tbody标签中
+      contain.innerHTML = str;
+    </script>
+    <style>
+      .pink {
+        background-color: pink;
+      }
+    </style>
+  </body>
+</html>
